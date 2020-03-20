@@ -1,0 +1,282 @@
+html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}
+
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+
+html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+*, *:before, *:after {box-sizing: inherit}
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
+
+:root {
+    --x: 0;
+    --y: 0;
+    --scaleX: 1;
+    --scaleY: 1;
+    --bgColour: black;
+    --z: 1;
+    --angle: 0deg;
+    --fontSize: 2rem;
+    --skewX: 0;
+    --skewY: 0;
+    --url: url('');
+    --fontFamily: 'serif';
+    --fontWeight: 'normal';
+    --fontStyle: 'normal';
+}
+
+html {
+    font-size: 62.5%;
+}
+
+header {
+    width: 100%;
+    height: 5vh;
+    background-color: steelblue;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 100%;
+}
+
+nav p {
+    margin: 0 2%;
+    padding: 0;
+    font-size: 2rem;
+}
+
+nav button {
+    text-transform: uppercase;
+}
+
+nav ul {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    height: 100%;
+}
+
+.mainMenu li {
+    position: relative;
+}
+
+.subMenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    flex-direction: column;
+    height: 100%;
+}
+
+.subMenu li {
+    background-color: steelblue;
+}
+
+.mainMenu button {
+    margin: 0;
+    color: white;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 4rem;
+}
+
+.mainMenu button:hover {
+    /* background-color: slategrey; */
+}
+
+.mainMenu li:hover .subMenu {
+    display: block;
+}
+
+.subMenu li button {
+    color: lightgrey;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.subMenu li button:hover {
+    background-color: slategrey;
+    color: white;
+}
+
+
+main {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+}
+
+.drawingBoard {
+    --bgColour: transparent;
+    flex-basis: 95%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bgColour);
+    background-image: var(--url);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.tools {
+    flex-basis: 5%;
+    background-color: slategray;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.tools > * {
+    flex-basis: 45%;
+    max-height: 50px;
+    height: 5%;
+}
+
+.tools > input {
+    flex-basis: 100%;
+}
+
+.drawingBoard > div {
+    width: 100px;
+    height: 100px;
+}
+
+.drawingBoard * {
+    position: absolute;
+    transform: translate(var(--x), var(--y)) scaleX(var(--scaleX)) scaleY(var(--scaleY)) rotate(var(--angle)) skew(var(--skewX), var(--skewY));
+    z-index: var(--z);
+    background-color: var(--bgColour);
+    background-image: var(--url);
+    background-size: cover;
+}
+
+.drawingBoard p {
+    background-color: transparent;
+    font-size: var(--fontSize);
+    color: var(--bgColour);
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeight);
+    font-style: var(--fontStyle);
+}
+
+button {
+    width: 75%;
+    color: black;
+    background-color: white;
+    font-size: 2rem;
+    margin: 1% auto;
+}
+
+.selected {
+    outline: 2px dashed red;
+}
+
+.buttonSelected {
+    border: 2px solid blue;
+    color: blue;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+/* .createButtons > div{
+    width: 100%;
+    height: auto;
+} */
+
+.toolbar input[type="text"],
+.toolbar input[type="url"] {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.toolbar input[type="submit"] {
+    text-transform: uppercase;
+    margin: 0 1rem;
+    padding: 0 2rem;
+}
+
+label {
+    padding: 1rem;
+}
+
+footer {
+    width: 100%;
+    height: 5vh;
+    background-color: lightgrey;
+    padding: 0 1%;
+    display: flex;
+    align-items: center;
+}
+
+footer > * {
+    display: flex;
+    align-items: center;
+}
+
+.toolbar {
+    flex-grow: 3;
+}
+
+.toolbar > * {
+    display: flex;
+}
+
+.toolbar form {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.toolbar input {
+    padding: 0.5rem;
+}
+
+.display {
+    /* flex-basis: 40%; */
+    flex-grow: 1;
+    /* width: 100%; */
+    height: 100%;
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.display p {
+    margin: 0 1%;
+}
+
+.shadow {
+    box-shadow: 2px 2px 2px black;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 86.6px 50px;
+    border-color: transparent transparent var(--bgColour) transparent;
+    background-color: transparent;
+}
+
+.hidden {
+    display: none;
+}
